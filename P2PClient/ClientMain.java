@@ -10,8 +10,8 @@ import javax.annotation.processing.Messager;
 
 public class ClientMain extends Thread {
 	
-	public static final String ServerIP = "63.209.35.169";
-	public static final int ServerPort = 30000;
+	public static String ServerIP = "63.209.35.169";
+	public static int ServerPort = 30000;
 	
 	public static final String CHECK_DATA 				= "CHECKDATA";
 
@@ -41,16 +41,26 @@ public class ClientMain extends Thread {
     
 	public static int MsgID = 1000000000;
 	
+	public ClientMain(){
+		
+	}
+	public ClientMain(String ServerIP, int ServerPort, String MYUID, int MyUDPListenPort){
+		ClientMain.ServerIP = ServerIP;
+		ClientMain.ServerPort = ServerPort;
+		ClientMain.MYUID = MYUID;
+		ClientMain.MyUDPListenPort = MyUDPListenPort;
+	}
+	public ClientMain(String ServerIP, int ServerPort, String MYUID){
+		ClientMain.ServerIP = ServerIP;
+		ClientMain.ServerPort = ServerPort;
+		ClientMain.MYUID = MYUID;
+	}
+	
 	public void run(){
 		try{
 			MsgQueue.clear();
 			client = new DatagramSocket(MyUDPListenPort);
-			
-			/*
-			 * C1 Login
-			 */
-			//UserAddInstr.Login(Integer.valueOf(ClientMain.GetMyUID()));
-			
+						
 			System.out.println("Client Begin");
 						
 			ClientReceiveMsg clientReceiveMsg = new ClientReceiveMsg(client);
@@ -58,18 +68,7 @@ public class ClientMain extends Thread {
 			
 			ClientExeMsg clientExeMsg = new ClientExeMsg(client);
 			clientExeMsg.start();
-			
-			/*
-			 * C2 Login and connect C1 send Msg to C1
-			 */
-			UserAddInstr.Login(Integer.valueOf(ClientMain.GetMyUID() + 1));
-			UserAddInstr.AskConnect(Integer.valueOf(GetMyUID() + 1), Integer.valueOf(GetMyUID()));
-			
-			
-			sleep(5000);
-			System.out.println(UserAddInstr.SendMessage(Integer.valueOf(GetMyUID() + 1), Integer.valueOf(GetMyUID()), "Hello C1"));
-			
-			
+				
 			
 			clientExeMsg.join();
 			
@@ -119,4 +118,6 @@ public class ClientMain extends Thread {
 			System.out.println("Client null");
 			return null;
 	}
+	
+	
 }
