@@ -20,6 +20,12 @@ public class UserAddInstr {
 		return false;
 	}
 
+	public static void AskAgency(int UID, int TargetUID, String message){
+		String string = Integer.toString(ClientMain.AGENCY) + "_" + Integer.toString(UID) + "_" + Integer.toString(TargetUID) + "_0_0_" + message;
+		ClientSendMsg clientSendMsg = new ClientSendMsg(ClientMain.GetClient(), string, new InetSocketAddress(ClientMain.ServerIP, ClientMain.ServerPort));
+		clientSendMsg.start();
+	}
+	
 	public static void AskConnect(int UID, int TargetUID){
 		String string = Integer.toString(ClientMain.ASK_CONNECT_UID) + "_"  + Integer.toString(UID) + "_" + Integer.toString(TargetUID);
 		ClientSendMsg clientSendMsg = new ClientSendMsg(ClientMain.GetClient(), string, new InetSocketAddress(ClientMain.ServerIP, ClientMain.ServerPort));

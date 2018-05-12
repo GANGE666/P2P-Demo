@@ -58,6 +58,9 @@ public class ClientSendMsg extends Thread {
 				UDPTools.SendMsg(client, target, msg);
 				sleep(SendInterval);
 			}
+			if(Model == MustArrive){
+				System.out.println("Send : \t" + target.toString() + " \t _____" + msg);
+			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();

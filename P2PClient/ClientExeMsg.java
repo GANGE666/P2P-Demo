@@ -59,7 +59,10 @@ public class ClientExeMsg extends Thread{
 						ClientSendMsg clientSendMsg = new ClientSendMsg(client, Integer.toString(ClientMain.RECEIVE_MSG) + "_" + ClientMain.GetMyUID() + "_0_0_0_Receive", target, 0);
 						clientSendMsg.start();
 						break;
-
+					case ClientMain.SEND_AGENCY:
+						ClientSendMsg clientReceiveAgencyMsg = new ClientSendMsg(client, Integer.toString(ClientMain.RECEIVE_SEND_AGENCY) + "_" + ClientMain.GetMyUID() + "_0_0_0_Receive", target, 0);
+						clientReceiveAgencyMsg.start();
+						break;
 					case ClientMain.CONFIRM_CONNECT:
 						//回复服务器收到了
 						ClientSendMsg clientSendMsg2 = new ClientSendMsg(client, Integer.toString(ClientMain.RECEIVE_CONFIRM_CONNECT) + "_" + ClientMain.GetMyUID(), serverTarget);
@@ -72,7 +75,7 @@ public class ClientExeMsg extends Thread{
 						
 						String ToTheOtherClient = Integer.toString(ClientMain.SEND_MSG) + "_" + UID + "_" + "0_0_0_Hello";
 						SocketAddress Btarget = new InetSocketAddress(element[PosTargetIP].replace("/", ""), Integer.valueOf(element[PosTargetPort]));
-						ClientSendMsg clientSendMsg3 = new ClientSendMsg(client, ToTheOtherClient, Btarget);
+						ClientSendMsg clientSendMsg3 = new ClientSendMsg(client, ToTheOtherClient, Btarget, ClientSendMsg.MustArrive);
 						clientSendMsg3.start();
 						
 						break;

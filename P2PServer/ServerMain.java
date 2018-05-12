@@ -14,16 +14,20 @@ public class ServerMain {
 	
 	public static final String CHECK_DATA 				= "CHECKDATA";
 
-	public static final int LOGIN_UID 					= 0x0000;
-	public static final int LOGOUT_UID 					= 0x0001;
-	public static final int ASK_CONNECT_UID				= 0x0002;
+	public static final int LOGIN_UID 					= 0000;
+	public static final int LOGOUT_UID 					= 0001;
+	public static final int ASK_CONNECT_UID				= 0002;
 	
-	public static final int SERVER_RECEIVE 				= 0x1000;
-	public static final int CONFIRM_CONNECT				= 0x1001;
-	public static final int RECEIVE_CONFIRM_CONNECT		= 0x1002;
+	public static final int AGENCY						= 0003;
+	public static final int SEND_AGENCY					= 0004;
+	public static final int RECEIVE_SEND_AGENCY			= 0005;
 	
-	public static final int SEND_MSG					= 0x2000;
-	public static final int RECEIVE_MSG					= 0x2001;
+	public static final int SERVER_RECEIVE 				= 1000;
+	public static final int CONFIRM_CONNECT				= 1001;
+	public static final int RECEIVE_CONFIRM_CONNECT		= 1002;
+	
+	public static final int SEND_MSG					= 2000;
+	public static final int RECEIVE_MSG					= 2001;
 	
 	private static Deque<String> MsgQueue = new LinkedList<>();
 	//public static Deque<SocketAddress> RepeatQueue = new LinkedList<>();

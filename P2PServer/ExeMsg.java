@@ -89,8 +89,24 @@ public class ExeMsg extends Thread {
 						System.out.println("Received : \t" + UID);
 						ServerMain.SendReceive.put(MsgID, true);
 						ServerMain.SendReceive.remove(MsgID);
+						//BUG!
 						break;
 
+					case ServerMain.AGENCY:
+						System.out.println("Agency : \t" + element[PosText]);
+						String Text = element[PosText];
+						String TargetUID = element[PosTargetUID];
+						
+						String TargetIP_Port = ServerMain.LOGINTable.get(TargetUID);
+						String AgencyMsg = Integer.toString(ServerMain.SEND_AGENCY) + "_" + ServerMain.ServerUID + "_" + TargetUID + "_0_0_" + Text;
+						
+						ServerSendMsg Agency = new ServerSendMsg(client, AgencyMsg, TargetIP_Port.split("_")[PosFromIP].replace("/", ""), Integer.valueOf(TargetIP_Port.split("_")[PosFromPort]), MustArrive);
+						Agency.start();
+						
+						break;
+					case ServerMain.RECEIVE_SEND_AGENCY:
+						System.out.println("RECEIVE_SEND_AGENCY : \t" + UID);
+						break;
 					default:
 						System.out.println("Function Code wrong!");
 						break;
